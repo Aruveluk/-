@@ -9,19 +9,19 @@
       <el-form :inline="true" :model="searchForm" class="search-form">
         <el-form-item label="订单号">
           <el-input
-              v-model="searchForm.orderSn"
-              placeholder="请输入订单号"
-              clearable
-              @keyup.enter="handleSearch"
+            v-model="searchForm.orderSn"
+            placeholder="请输入订单号"
+            clearable
+            @keyup.enter="handleSearch"
           />
         </el-form-item>
         <el-form-item label="订单状态">
           <el-select v-model="searchForm.status" placeholder="全部状态" clearable>
             <el-option
-                v-for="(item, key) in orderStatusMap"
-                :key="key"
-                :label="item.label"
-                :value="Number(key)"
+              v-for="(item, key) in orderStatusMap"
+              :key="key"
+              :label="item.label"
+              :value="Number(key)"
             />
           </el-select>
         </el-form-item>
@@ -36,10 +36,10 @@
     <el-form-item label="订单状态">
       <el-select v-model="searchForm.status" placeholder="请选择状态" clearable>
         <el-option
-            v-for="(item, key) in orderStatusMap"
-            :key="key"
-            :label="item.label"
-            :value="Number(key)"
+          v-for="(item, key) in orderStatusMap"
+          :key="key"
+          :label="item.label"
+          :value="Number(key)"
         />
       </el-select>
     </el-form-item>
@@ -52,17 +52,16 @@
         <el-table-column prop="receiverPhone" label="联系电话" width="120" />
         <el-table-column label="收货地址" min-width="200">
           <template #default="{ row }">
-            {{ row.receiverProvince }}{{ row.receiverCity }}{{ row.receiverDistrict }}{{ row.receiverAddress }}
+            {{ row.receiverProvince }}{{ row.receiverCity }}{{ row.receiverDistrict
+            }}{{ row.receiverAddress }}
           </template>
         </el-table-column>
         <el-table-column prop="totalAmount" label="订单金额" width="100">
-          <template #default="{ row }">
-            ¥{{ row.totalAmount?.toFixed(2) }}
-          </template>
+          <template #default="{ row }"> ¥{{ row.totalAmount?.toFixed(2) }} </template>
         </el-table-column>
         <el-table-column prop="payAmount" label="实付金额" width="100">
           <template #default="{ row }">
-            <span style="color: #e1251b; font-weight: bold;">¥{{ row.payAmount?.toFixed(2) }}</span>
+            <span style="color: #e1251b; font-weight: bold">¥{{ row.payAmount?.toFixed(2) }}</span>
           </template>
         </el-table-column>
         <el-table-column prop="payType" label="支付方式" width="100">
@@ -80,21 +79,17 @@
         <el-table-column prop="createTime" label="创建时间" width="160" />
         <el-table-column label="操作" width="180" fixed="right">
           <template #default="{ row }">
-            <el-button type="primary" link size="small" @click="handleView(row)">
-              查看
-            </el-button>
+            <el-button type="primary" link size="small" @click="handleView(row)"> 查看 </el-button>
             <el-button
-                v-if="row.status === 1"
-                type="success"
-                link
-                size="small"
-                @click="handleDeliver(row)"
+              v-if="row.status === 1"
+              type="success"
+              link
+              size="small"
+              @click="handleDeliver(row)"
             >
               发货
             </el-button>
-            <el-button type="danger" link size="small" @click="handleDelete(row)">
-              删除
-            </el-button>
+            <el-button type="danger" link size="small" @click="handleDelete(row)"> 删除 </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -102,13 +97,13 @@
       <!-- 分页 -->
       <div class="pagination-wrapper">
         <el-pagination
-            v-model:current-page="pagination.pageNum"
-            v-model:page-size="pagination.pageSize"
-            :total="pagination.total"
-            :page-sizes="[10, 20, 50, 100]"
-            layout="total, sizes, prev, pager, next, jumper"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
+          v-model:current-page="pagination.pageNum"
+          v-model:page-size="pagination.pageSize"
+          :total="pagination.total"
+          :page-sizes="[10, 20, 50, 100]"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
         />
       </div>
     </el-card>
@@ -146,26 +141,49 @@
           </el-tag>
         </el-descriptions-item>
         <el-descriptions-item label="收货人">{{ currentOrder.receiverName }}</el-descriptions-item>
-        <el-descriptions-item label="联系电话">{{ currentOrder.receiverPhone }}</el-descriptions-item>
+        <el-descriptions-item label="联系电话">{{
+          currentOrder.receiverPhone
+        }}</el-descriptions-item>
         <el-descriptions-item label="收货地址" :span="2">
-          {{ currentOrder.receiverProvince }}{{ currentOrder.receiverCity }}{{ currentOrder.receiverDistrict }}{{ currentOrder.receiverAddress }}
+          {{ currentOrder.receiverProvince }}{{ currentOrder.receiverCity
+          }}{{ currentOrder.receiverDistrict }}{{ currentOrder.receiverAddress }}
         </el-descriptions-item>
-        <el-descriptions-item label="订单金额">¥{{ currentOrder.totalAmount?.toFixed(2) }}</el-descriptions-item>
-        <el-descriptions-item label="运费">¥{{ currentOrder.freightAmount?.toFixed(2) }}</el-descriptions-item>
-        <el-descriptions-item label="优惠券抵扣">¥{{ currentOrder.couponAmount?.toFixed(2) }}</el-descriptions-item>
-        <el-descriptions-item label="积分抵扣">¥{{ currentOrder.integrationAmount?.toFixed(2) }}</el-descriptions-item>
+        <el-descriptions-item label="订单金额"
+          >¥{{ currentOrder.totalAmount?.toFixed(2) }}</el-descriptions-item
+        >
+        <el-descriptions-item label="运费"
+          >¥{{ currentOrder.freightAmount?.toFixed(2) }}</el-descriptions-item
+        >
+        <el-descriptions-item label="优惠券抵扣"
+          >¥{{ currentOrder.couponAmount?.toFixed(2) }}</el-descriptions-item
+        >
+        <el-descriptions-item label="积分抵扣"
+          >¥{{ currentOrder.integrationAmount?.toFixed(2) }}</el-descriptions-item
+        >
         <el-descriptions-item label="实付金额">
-          <span style="color: #e1251b; font-weight: bold; font-size: 16px;">
+          <span style="color: #e1251b; font-weight: bold; font-size: 16px">
             ¥{{ currentOrder.payAmount?.toFixed(2) }}
           </span>
         </el-descriptions-item>
-        <el-descriptions-item label="支付方式">{{ payTypeMap[currentOrder.payType] }}</el-descriptions-item>
+        <el-descriptions-item label="支付方式">{{
+          payTypeMap[currentOrder.payType]
+        }}</el-descriptions-item>
         <el-descriptions-item label="创建时间">{{ currentOrder.createTime }}</el-descriptions-item>
-        <el-descriptions-item label="支付时间">{{ currentOrder.paymentTime || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="发货时间">{{ currentOrder.deliveryTime || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="物流公司">{{ currentOrder.deliveryCompany || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="物流单号">{{ currentOrder.deliverySn || '-' }}</el-descriptions-item>
-        <el-descriptions-item label="备注" :span="2">{{ currentOrder.note || '无' }}</el-descriptions-item>
+        <el-descriptions-item label="支付时间">{{
+          currentOrder.paymentTime || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item label="发货时间">{{
+          currentOrder.deliveryTime || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item label="物流公司">{{
+          currentOrder.deliveryCompany || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item label="物流单号">{{
+          currentOrder.deliverySn || '-'
+        }}</el-descriptions-item>
+        <el-descriptions-item label="备注" :span="2">{{
+          currentOrder.note || '无'
+        }}</el-descriptions-item>
       </el-descriptions>
     </el-dialog>
   </div>
@@ -181,20 +199,20 @@ import {
   orderStatusMap,
   payTypeMap,
   type Order,
-  type DeliverParams
+  type DeliverParams,
 } from '@/api/order'
 
 // 搜索表单
 const searchForm = reactive({
   orderSn: '',
-  status: undefined as number | undefined
+  status: undefined as number | undefined,
 })
 
 // 分页
 const pagination = reactive({
   pageNum: 1,
   pageSize: 10,
-  total: 0
+  total: 0,
 })
 
 // 订单列表
@@ -206,7 +224,7 @@ const deliverDialogVisible = ref(false)
 const deliverForm = reactive<DeliverParams>({
   id: 0,
   deliveryCompany: '',
-  deliverySn: ''
+  deliverySn: '',
 })
 
 // 详情对话框
@@ -217,14 +235,14 @@ const currentOrder = ref<Order | null>(null)
 const fetchOrderList = async () => {
   loading.value = true
   try {
-    const res = await getOrderList({
+    const data = await getOrderList({
       pageNum: pagination.pageNum,
       pageSize: pagination.pageSize,
       orderSn: searchForm.orderSn || undefined,
-      status: searchForm.status
+      status: searchForm.status,
     })
-    orderList.value = res.data.records
-    pagination.total = res.data.total
+    orderList.value = data.records
+    pagination.total = data.total
   } catch (error) {
     ElMessage.error('获取订单列表失败')
   } finally {
@@ -296,7 +314,7 @@ const handleDelete = (row: Order) => {
   ElMessageBox.confirm(`确定要删除订单 ${row.orderSn} 吗？`, '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
-    type: 'warning'
+    type: 'warning',
   }).then(async () => {
     try {
       await deleteOrder(row.id)
